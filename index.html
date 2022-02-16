@@ -1,74 +1,111 @@
 <!DOCTYPE html>
 <html lang="ru">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Lorem, ipsum dolor.</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Салон семейной оптики "Совушка"</title>
     <!-- RESET.CSS -->
-    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reset.css" />
     <!-- Roboto Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
-</head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <header class="header">
-            <p class="header-logo ml100">Lorem</p>
-            <nav class="header-nav mr100">
-                <p><a class="header-nav__link" href="#top_info">Lorem.</a></p>
-                <p><a class="header-nav__link" href="#slider">porro!</a></p>
-                <p><a class="header-nav__link" href="#bot_info">Incidunt.</a></p>
-            </nav>
-            <div class="mobile-menu mr100" onclick="toogleNav()">
-                <div class="mobile-menu__btn">
-                    <hr>
-                    <hr>
-                    <hr>
-                </div>
-            </div>
-        </header>
-        <main class="main mb100">
-            <a name="top_info"></a>
-            <section class="info mb100">
-                <p class="info-text "><b>Тут какой-то текст будет.</b> Далеко-далеко за словесными горами в стране гласных и согласных живут, рыбные тексты. Пустился вопрос рукопись на берегу ты предупреждал необходимыми маленькая, ему наш имени дороге продолжил большого, толку приставка переписали о страна? Семантика эта раз которое образ, жизни ее дал над переулка переписали, подпоясал продолжил до! Если использовало, всемогущая о пустился рот лучше!                    
-                </p>
-                <div class="info-worktime">
-                    <p class="info-worktime__text">Елена</p>
-                    <p class="info-worktime__text">8-999-999-99-99</p>
-                    <p class="info-worktime__text">Наталья</p>
-                    <p class="info-worktime__text">8-999-999-99-99</p>
-                    <p class="info-worktime__text">Балашиха, ул. Калинина 1</p>
-                    <p class="info-worktime__text">С  9 до 18</p>
-            </section>
-            <a name="slider"></a>
-            <section class="slider mb100">
-                <div id="slider" data-pic-id="1" class="slider-images">
-                    <img class="slider-img" src="img/1200x900.jpg" alt="">
-                    <p class="slider-text">Описание под картинку</p>
-                    <input class="slider-btn btn-left abs_l0" type="button" onclick="sliderPicChange(-1)" value="&lt;">
-                    <input class="slider-btn btn-right abs_r0" type="button" onclick="sliderPicChange(1)" value="&gt;">
-                </div>
-            </section>
-            <a name="bot_info"></a>
-            <section class="info">
-                <p class="info-text"><b>Ещё какой-то текст!</b> Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Родного коварных дорогу щеке приставка текст, грамматики, встретил журчит текстами ipsum океана снова сбить парадигматическая одна мир там предупреждал всемогущая подпоясал семь? Страну ему рыбными до. Злых, не. Сих алфавит рекламных мир семантика деревни грустный инициал, пор наш меня, буквенных подпоясал своих знаках послушавшись там! Повстречался залетают путь своих сих, моей безопасную сбить своего рукописи курсивных всеми предложения коварных меня переписывается предупредила запятых. Возвращайся от всех агентство заманивший диких живет свое если не залетают свою пояс буквоград они грамматики, путь прямо? Текстов сих парадигматическая рукописи заглавных, пояс пунктуация рекламных текстами однажды.</p>
-                <img class="info-img" src="img/sample.jpg" alt="" srcset="">
-            </section>
-        </main>
-        <footer class="footer">
-            <p class="footer-text">Lorem, ipsum.</p>
-            <p class="footer-text">Voluptate, quibusdam!</p>
-            <p class="footer-text">Aut, provident.</p>
-        </footer>
+      <header class="header">
+        <p class="header-logo ml100">салон семейной оптики "Совушка"</p>
+        <nav class="header-nav mr100">
+          <p><a class="header-nav__link" href="#top_info">Lorem.</a></p>
+          <p><a class="header-nav__link" href="#slider">porro!</a></p>
+          <p><a class="header-nav__link" href="#bot_info">Incidunt.</a></p>
+        </nav>
+        <div class="mobile-menu" onclick="toogleNav()">
+          <div class="mobile-menu__btn">
+            <hr />
+            <hr />
+            <hr />
+          </div>
+        </div>
+      </header>
+      <main class="main mb100">
+        <a name="top_info"></a>
+        <section class="info mb100">
+          <!-- <p class="info-text">
+            <b>Тут какой-то текст а может и нет.</b> 
+          </p> -->
+          <div class="info-worktime">
+            <p class="info-worktime__text">
+              Московская область г.Балашиха ул. Калинина, д.1, 1 этаж, каб.1.6
+            </p>
+            <p class="info-worktime__text">
+              Понедельник-пятница с 11:00 до 19:00
+            </p>
+            <p class="info-worktime__text">Суббота с 11:00 до 18:00</p>
+            <p class="info-worktime__text">Воскресенье выходной день</p>
+            <p class="info-worktime__text">
+              Наталья, менеджер:
+              <a class="tel-link" href="tel:+79253053327">+7 (925) 305-33-27</a>
+            </p>
+            <p class="info-worktime__text">
+              Елена, менеджер:
+              <a class="tel-link" href="tel:+79687840601">+7 (968) 784-06-01</a>
+            </p>
+          </div>
+          <img src="img/logo_big.png" alt="логотип" />
+        </section>
+        <a name="slider"></a>
+        <section class="slider mb100">
+          <div id="slider" data-pic-id="1" class="slider-images">
+            <img class="slider-img" src="img/1200x900.jpg" alt="" />
+            <p class="slider-text">Описание под картинку</p>
+            <input
+              class="slider-btn btn-left abs_l0"
+              type="button"
+              onclick="sliderPicChange(-1)"
+              value="&lt;"
+            />
+            <input
+              class="slider-btn btn-right abs_r0"
+              type="button"
+              onclick="sliderPicChange(1)"
+              value="&gt;"
+            />
+          </div>
+        </section>
+        <a name="bot_info"></a>
+        <section class="info">
+          <p class="info-text">
+            Один из врачей, сотрудничающий с нами -
+            <b>Шпак Лариса Аркадьевна</b>, дипломированный специалист,
+            врач-офтальмолог с 30-ти летним стажем работы в офтальмологии и
+            оптометрии. Специализируется на проблемах деткой офтальмологии,
+            осуществляет подбор контактнх линз и очков для коррекции зрения,
+            осуществляет аппаратное лечение, коррекцию зрения. Медицинская
+            лицензия <b>ЛО-50-01-01 1249 от 10.09.2019г</b>. Принимает по
+            адресу: Балашиха, ул.Калинина, д.1, оф. 3.7. График работы:
+            понедельник-пятница с 11:00 до 17:00 по предварительной записи.
+            Записаться можно по телефону 89253000861
+          </p>
+          <img class="info-img" src="img/sample.jpg" alt="" srcset="" />
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer-text">Lorem, ipsum.</p>
+        <p class="footer-text">Voluptate, quibusdam!</p>
+        <p class="footer-text">Aut, provident.</p>
+      </footer>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.js"
-        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
     <script src="scripts/main.js"></script>
-
-</body>
-
+  </body>
 </html>
