@@ -35,6 +35,70 @@ body {
   display: none;
 }
 
+.red {
+  color: red;
+}
+
+.purple {
+  color: purple;
+}
+
+.small-text {
+  font-size: 20px;
+}
+
+.small-text::before {
+  color: red;
+  content: "*";
+}
+
+.up {
+  position: fixed; /* фиксированное положение */
+  bottom: 50px; /* отступ от нижней части экрана */
+  right: 50px; /* отступ справа */
+  cursor: pointer; /* вид курсора при наведении */
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.up > img {
+  width: 100px;
+}
+
+/* купон на скидку */
+.coupone {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.coupone-img {
+  width: 60%;
+}
+
+.coupone-close {
+  position: absolute;
+  font-weight: 700;
+  font-size: 80px;
+  top: 20px;
+  left: 20px;
+  color: gray;
+  padding: 20px 30px;
+  border-radius: 50%;
+  border: 1px solid gray;
+  cursor: pointer;
+}
+
+.coupone-close:hover {
+  color: #fff;
+  background-color: rgb(37, 35, 35);
+}
+
 .container {
   max-width: 1920px;
   margin: 0 auto;
@@ -82,7 +146,6 @@ body {
   display: flex;
   justify-content: space-between;
   flex-shrink: 0;
-  z-index: 1;
   position: relative;
   margin-bottom: 100px;
   color: #ffc6c8;
@@ -209,6 +272,28 @@ body {
   border-radius: 10px;
   margin-bottom: 25px;
 }
+.dampers {
+  margin-left: 50px;
+}
+.dampers-discount {
+  margin-bottom: 30px;
+}
+
+.dampers-list {
+  list-style: circle;
+  margin-bottom: 30px;
+  padding-left: 60px;
+}
+
+.dampers-coupon {
+  color: rgb(112, 157, 216);
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.dampers-coupon:hover {
+  text-decoration: underline;
+}
 
 .assortment-element__head {
   font-weight: 700;
@@ -222,7 +307,6 @@ body {
 .assortment-element__descr {
   line-height: 60px;
   margin: 20px 40px;
-
   display: none;
 }
 

@@ -78,8 +78,28 @@ const toogleNav = () => {
     }
 }
 
-// слушатели на выпадающие списки ассортимента
+// стырено https://ru.stackoverflow.com/questions/641531/Как-определить-что-элемент-в-зоне-видимости-окна-браузера
+// определяется, надо ли показывать стрелочку вверх
+const checkIfArrowNeeded = () => {
+    const blockPosition = $('.header').offset().top;
+    const blockHeight = $('.header').height();
+    const windowScrollPosition = $(window).scrollTop();
+    if (blockPosition + blockHeight <= windowScrollPosition) {
+        $('.up').show();
+    } else {
+        $('.up').hide();
+    }
+
+};
+
+// показать купон
+const showCoupone = () => {
+
+}
+
 $(document).ready(() => {
+    checkIfArrowNeeded();
+    // слушатели на выпадающие списки ассортимента
     $(".assortment-element").on("click", (e) => {
         let element = e.target;
         // надо проверить, что нажали не на assortment-element__descr (ибо это тоже часть блока assortment-element)
@@ -90,4 +110,17 @@ $(document).ready(() => {
         // теперь ищется текст assortment-element__descr в element
         element.children('.assortment-element__descr').toggle();
     });
+
+    // при скролле по странице также проверяется надо ли показывать стрелочку
+    $(window).on('scroll', checkIfArrowNeeded);
+
+    // слушатель на открытие купона на скидку
+    $('.dampers-coupon').on('click', () => {
+        $('.coupone').css('display', 'flex');
+    });
+    // закрытие купона
+    $('.coupone-close').on('click', () => {
+        $('.coupone').css('display', 'none');
+    })
 });
+
