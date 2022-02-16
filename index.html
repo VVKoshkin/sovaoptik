@@ -18,11 +18,10 @@
   <body>
     <div class="container">
       <header class="header">
-        <p class="header-logo ml100">салон семейной оптики "Совушка"</p>
-        <nav class="header-nav mr100">
-          <p><a class="header-nav__link" href="#top_info">Lorem.</a></p>
-          <p><a class="header-nav__link" href="#slider">porro!</a></p>
-          <p><a class="header-nav__link" href="#bot_info">Incidunt.</a></p>
+        <nav class="header-nav">
+          <p><a class="header-nav__link" href="#top_info">Наши контакты</a></p>
+          <p><a class="header-nav__link" href="#slider">Наши товары</a></p>
+          <p><a class="header-nav__link" href="#bot_info">Наш врач</a></p>
         </nav>
         <div class="mobile-menu" onclick="toogleNav()">
           <div class="mobile-menu__btn">
@@ -31,13 +30,11 @@
             <hr />
           </div>
         </div>
+        <p class="header-logo">салон семейной оптики "Совушка"</p>
       </header>
       <main class="main mb100">
         <a name="top_info"></a>
         <section class="info mb100">
-          <!-- <p class="info-text">
-            <b>Тут какой-то текст а может и нет.</b> 
-          </p> -->
           <div class="info-worktime">
             <p class="info-worktime__text">
               Московская область г.Балашиха ул. Калинина, д.1, 1 этаж, каб.1.6
@@ -56,7 +53,7 @@
               <a class="tel-link" href="tel:+79687840601">+7 (968) 784-06-01</a>
             </p>
           </div>
-          <img src="img/logo_big.png" alt="логотип" />
+          <img class="info-img" src="img/logo_big.png" alt="логотип" />
         </section>
         <a name="slider"></a>
         <section class="slider mb100">
@@ -89,7 +86,8 @@
             лицензия <b>ЛО-50-01-01 1249 от 10.09.2019г</b>. Принимает по
             адресу: Балашиха, ул.Калинина, д.1, оф. 3.7. График работы:
             понедельник-пятница с 11:00 до 17:00 по предварительной записи.
-            Записаться можно по телефону 89253000861
+            Записаться можно по телефону
+            <a class="tel-link" href="tel:+79253000861">89253000861</a>
           </p>
           <img class="info-img" src="img/sample.jpg" alt="" srcset="" />
         </section>
