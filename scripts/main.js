@@ -1,5 +1,5 @@
 class SliderImage {
-    // поля: ID, ссылка, текст для картинки
+    // РїРѕР»СЏ: ID, СЃСЃС‹Р»РєР°, С‚РµРєСЃС‚ РґР»СЏ РєР°СЂС‚РёРЅРєРё
     constructor(ID, imgSrc, subText) {
         this.ID = ID;
         this.imgSrc = imgSrc;
@@ -12,39 +12,39 @@ const sliderPicChange = (direction) => {
     const sliderDOMElem = document.getElementById('slider');
     const sliderDOMImgElem = sliderDOMElem.getElementsByClassName('slider-img')[0];
     const sliderDOMTextElem = sliderDOMElem.getElementsByClassName('slider-text')[0];
-    // из DOM элемента получается ID картинки текущей
+    // РёР· DOM СЌР»РµРјРµРЅС‚Р° РїРѕР»СѓС‡Р°РµС‚СЃСЏ ID РєР°СЂС‚РёРЅРєРё С‚РµРєСѓС‰РµР№
     let picId = parseInt(sliderDOMElem.dataset.picId);
-    const newPic = getImgInfoFromDB(picId, direction); // получаем новый объект картинки
+    const newPic = getImgInfoFromDB(picId, direction); // РїРѕР»СѓС‡Р°РµРј РЅРѕРІС‹Р№ РѕР±СЉРµРєС‚ РєР°СЂС‚РёРЅРєРё
     // changing DOMs
     sliderDOMElem.dataset.picId = newPic.ID;
     sliderDOMImgElem.src = 'img/' + newPic.imgSrc;
     sliderDOMTextElem.innerText = newPic.subText;
 }
 
-// пока заглушка - эмулятор, потом будет отправка на REST сервис какой-нить простенький
+// РїРѕРєР° Р·Р°РіР»СѓС€РєР° - СЌРјСѓР»СЏС‚РѕСЂ, РїРѕС‚РѕРј Р±СѓРґРµС‚ РѕС‚РїСЂР°РІРєР° РЅР° REST СЃРµСЂРІРёСЃ РєР°РєРѕР№-РЅРёС‚СЊ РїСЂРѕСЃС‚РµРЅСЊРєРёР№
 const getImgInfoFromDB = (picId, direction) => {
-    // примерно в таком виде всё будет лежать в БД
+    // РїСЂРёРјРµСЂРЅРѕ РІ С‚Р°РєРѕРј РІРёРґРµ РІСЃС‘ Р±СѓРґРµС‚ Р»РµР¶Р°С‚СЊ РІ Р‘Р”
     const allPicObjectsFromDB = [
         {
             id: 1,
             link: '1200x900.jpg',
-            text: 'Lorem ipsum dolor sit amet'
+            text: 'РћРїРёСЃР°РЅРёРµ РїРѕРґ РєР°СЂС‚РёРЅРєСѓ'
         },
         {
             id: 2,
             link: '1200x900_2.jpg',
-            text: 'consectetur adipisicing elit. Sed natus'
+            text: 'РћРїРёСЃР°РЅРёРµ РїРѕРґ РєР°СЂС‚РёРЅРєСѓ 2'
         },
         {
             id: 3,
             link: '1200x900_3.jpg',
-            text: 'doloremque fugiat repudiandae minus alias?'
+            text: 'РћРїРёСЃР°РЅРёРµ РїРѕРґ РєР°СЂС‚РёРЅРєСѓ 3'
         }
     ];
-    // эта логика будет реализована через бэкенд позже
+    // СЌС‚Р° Р»РѕРіРёРєР° Р±СѓРґРµС‚ СЂРµР°Р»РёР·РѕРІР°РЅР° С‡РµСЂРµР· Р±СЌРєРµРЅРґ РїРѕР·Р¶Рµ
     let newPicId = picId + direction;
-    if (newPicId > 3) newPicId = 1; // прокрутка вперёд - заново начинается
-    else if (newPicId < 1) newPicId = 3; // прокрутка назад - с самой последней
+    if (newPicId > 3) newPicId = 1; // РїСЂРѕРєСЂСѓС‚РєР° РІРїРµСЂС‘Рґ - Р·Р°РЅРѕРІРѕ РЅР°С‡РёРЅР°РµС‚СЃСЏ
+    else if (newPicId < 1) newPicId = 3; // РїСЂРѕРєСЂСѓС‚РєР° РЅР°Р·Р°Рґ - СЃ СЃР°РјРѕР№ РїРѕСЃР»РµРґРЅРµР№
     let img = null;
     for (let pic of allPicObjectsFromDB) {
         if (pic["id"] === newPicId) {
@@ -55,5 +55,25 @@ const getImgInfoFromDB = (picId, direction) => {
     if (img == null) {
         img = new SliderImage(0, 'sample.jpg', 'DEFAULT');
     }
-    return img; // в img мы просто будем засовывать всю инфу по картинке просто из БД
+    return img; // РІ img РјС‹ РїСЂРѕСЃС‚Рѕ Р±СѓРґРµРј Р·Р°СЃРѕРІС‹РІР°С‚СЊ РІСЃСЋ РёРЅС„Сѓ РїРѕ РєР°СЂС‚РёРЅРєРµ РїСЂРѕСЃС‚Рѕ РёР· Р‘Р”
+}
+
+const toogleNav = () => {
+    // Header nav DOM
+    const headerNavDom = document.getElementsByClassName('header-nav')[0];
+    // РёР·РЅР°С‡Р°Р»СЊРЅР°СЏ РІС‹СЃРѕС‚Р° РІС‹РїР°РґР°СЋС‰РµРіРѕ РјРµРЅСЋ РЅР°РІР° (РїСЂРё РѕС‚РєСЂС‹С‚РёРё 0, РїСЂРё Р·Р°РєСЂС‹С‚РёРё - РєР°РєР°СЏ Р±СѓРґРµС‚)
+    let navHeight = parseInt(window.getComputedStyle(headerNavDom).getPropertyValue('height'));
+    // Header DOM
+    const headerDOM = document.getElementsByClassName('header')[0];
+    headerNavDom.style.setProperty('display', headerNavDom.style.display === 'block' ? 'none' : 'block'); // РїРѕРєР°Р·Р°С‚СЊ - СЃРєСЂС‹С‚СЊ РїСЂРё РЅР°Р¶Р°С‚РёРё
+    /* РїСЂРё РѕС‚РєСЂС‹С‚РёРё РІС‹С‡РёСЃР»РёС‚СЊ РІРµР»РёС‡РёРЅСѓ РЅР°РІР° Рё РїСЂРёР±Р°РІРёС‚СЊ Рє С…РµРґРµСЂСѓ С‚Р°РєРѕР№ РјР°СЂР¶РёРЅ */
+    if (headerNavDom.style.display === 'block') {
+        navHeight = parseInt(window.getComputedStyle(headerNavDom).getPropertyValue('height'));
+        const headerMb = parseInt(window.getComputedStyle(headerDOM).marginBottom);
+        headerDOM.style.marginBottom = headerMb + navHeight + 'px';
+    } else {
+        /* РїСЂРё Р·Р°РєСЂС‹С‚РёРё Р±РµСЂС‘С‚СЃСЏ navHeight, РІС‹С‡РёСЃР»РµРЅРЅР°СЏ РґРѕ Р·Р°РєСЂС‹С‚РёСЏ, Рё РёР· РјР°СЂР¶РёРЅР° С…РµРґРµСЂР° РІС‹С‡РёС‚Р°РµС‚СЃСЏ СЌС‚Р° РІС‹СЃРѕС‚Р°, С‡С‚РѕР± РІРµСЂРЅСѓС‚СЊ РІСЃС‘ РєР°Рє СЂР°РЅСЊС€Рµ */
+        const headerMb = parseInt(window.getComputedStyle(headerDOM).marginBottom);
+        headerDOM.style.marginBottom = (headerMb - navHeight) + 'px';
+    }
 }
