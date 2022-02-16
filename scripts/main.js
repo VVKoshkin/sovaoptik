@@ -77,3 +77,17 @@ const toogleNav = () => {
         headerDOM.style.marginBottom = (headerMb - navHeight) + 'px';
     }
 }
+
+// слушатели на выпадающие списки ассортимента
+$(document).ready(() => {
+    $(".assortment-element").on("click", (e) => {
+        let element = e.target;
+        // надо проверить, что нажали не на assortment-element__descr (ибо это тоже часть блока assortment-element)
+        if (element.className === 'assortment-element__descr') return;
+        // если клик по хедеру - берётся его родитель assortment-element
+        if (element.className === 'assortment-element__head')
+            element = $(element).parent('.assortment-element');
+        // теперь ищется текст assortment-element__descr в element
+        element.children('.assortment-element__descr').toggle();
+    });
+});
