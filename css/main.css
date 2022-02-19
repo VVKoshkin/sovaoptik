@@ -198,9 +198,9 @@ body {
 }
 
 .info-text {
-  max-width: 50%;
   text-align: justify;
   line-height: 50px;
+  padding: 0 15px;
 }
 
 .info-text > b {
@@ -210,7 +210,7 @@ body {
 .info-worktime {
   line-height: 60px;
   text-align: left;
-  margin-left: 50px;
+  margin-left: 30px;
 }
 
 .info-worktime__text {
