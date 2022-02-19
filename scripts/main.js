@@ -118,9 +118,11 @@ $(document).ready(() => {
     $('.dampers-coupon').on('click', () => {
         $('.coupone').css('display', 'flex');
     });
-    // закрытие купона
-    $('.coupone-close').on('click', () => {
-        $('.coupone').css('display', 'none');
-    })
+    // закрытие купона по крестику или по клику на полупрозрачный фон
+    $('.coupone').on('click', (e) => {
+        if ($(e.target).attr('class') !== 'coupone-img')
+            $('.coupone').css('display', 'none');
+    });
+
 });
 

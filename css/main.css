@@ -42,6 +42,9 @@ body {
 .purple {
   color: purple;
 }
+.cadetblue {
+  color: cadetblue;
+}
 
 .small-text {
   font-size: 20px;
@@ -277,6 +280,7 @@ body {
 }
 .dampers-discount {
   margin-bottom: 30px;
+  line-height: 40px;
 }
 
 .dampers-list {
@@ -308,6 +312,48 @@ body {
   line-height: 60px;
   margin: 20px 40px;
   display: none;
+}
+
+.suppliers-table {
+  margin: 0 auto;
+  width: 70%;
+}
+
+.suppliers-table th {
+  font-weight: 700;
+}
+
+.suppliers-table__coldesc {
+  font-weight: 700;
+}
+
+.suppliers-table th,
+td {
+  padding: 15px 10px; /* Поля вокруг содержимого таблицы */
+  border: 1px solid black; /* Параметры рамки */
+  text-align: center;
+}
+
+.suppliers-table td {
+  width: 50%;
+}
+
+.suppliers-table th {
+  border: none;
+  padding-bottom: 25px;
+  font-size: larger;
+  user-select: none;
+}
+.suppliers-table__coldesc {
+  background-color: rgb(241, 226, 226);
+  user-select: none;
+  cursor: initial;
+}
+
+.suppliers-table__row:hover {
+  cursor: pointer;
+
+  background-color: rgb(241, 226, 226);
 }
 
 .footer {
