@@ -314,6 +314,10 @@ body {
   display: none;
 }
 
+.production-time {
+  margin-top: 50px;
+  margin-left: 10px;
+}
 .suppliers-table {
   margin: 0 auto;
   width: 70%;
@@ -405,5 +409,10 @@ td {
   .mobile-menu {
     display: block;
     margin-left: 30px;
+  }
+
+  .production-time {
+    text-align: center;
+    margin-left: 0;
   }
 }
