@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Админпанель</title>
+    <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/admin.css') }}"
+    />
+</head>
+<body>
+{% if authorized %}
+<h1>Авторизован!</h1>
+<h2>Информация сверху</h2>
+<section class="top-info">
+    <table id="top_table">
+        <tr>
+            <td>Это телефон</td>
+            <td>Отметить жирным</td>
+            <td>Текст</td>
+            <td>Порядок на странице</td>
+            <td></td>
+        </tr>
+        {% for rec in topInfo %}
+        <tr data-id="{{ rec.id }}" class="top-table__row">
+            <td><input name="isPhone" type="checkbox" {% if rec.is_phone %} checked {% endif %}/></td>
+            <td><input name="isBold" type="checkbox" {% if rec.is_bold %} checked {% endif %}/></td>
+            <td>
+                <input
+                        class="text-info_input"
+                        type="text"
+                        value="{{ rec.text }}"
+                        placeholder="Введите текст записи"
+                        name = "text"
+                        required
+                />
+            </td>
+            <td>
+                <input type="text"
+                       placeholder="Введите порядок записи на странице"
+                       name="order"
+                       value="{{ rec.order }}"
+                />
+            </td>
+            <td><input name="delButton" type="button" value="Удалить"/></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <input type="button" name="addButton" value="Добавить"/>
+    <input type="button" name="saveButton" value="Сохранить"/>
+</section>
+<section class="slider">
+    <h2>Картинки на слайдере</h2>
+    {% for rec in sliderInfo %}
+    <div class="slider-pic">
+        <img
+                class="slider-pic__img"
+                src="/static/img/slider/{{ rec.ref }}.jpg"
+                alt="{{ rec.inner_text }}"
+        />
+        <input
+                class="slider-pic__text"
+                type="text"
+                value="{{ rec.inner_text }}"
+        />
+        <input class="slider-pic__btn" type="button" value="Удалить"/>
+    </div>
+    {% endfor %}
+    <input type="button" value="Добавить"/>
+</section>
+<section class="low-prices">
+    <h2>Информация о невысоких ценах (список)</h2>
+    {% for rec in lowPrice %}
+    <div class="low-price">
+        <input
+                type="text"
+                value="{{ rec.text }}"
+        />
+        <input type="button" value="Удалить"/>
+    </div>
+    {% endfor %}
+    <input type="button" value="Добавить"/>
+</section>
+<section class="assortment">
+    <h2>Ассортимент</h2>
+    {% for rec in assortment %}
+    <div class="assortment-elem">
+        <input
+                type="text"
+                class="assortment-elem__head"
+                value="{{ rec.header_text }}"
+        />
+        <div contenteditable="true" class="assortment-elem__descr">{{ rec.description_text }}</div>
+        <input class="assortment-elem__btn" type="button" value="Удалить"/>
+    </div>
+    {% endfor %}
+    <input type="button" value="Добавить"/>
+</section>
+{% else %}
+<form method="POST">
+    {{ formAuth.csrf_token }} {{ formAuth.login.label }} {{ formAuth.login()
+    }} {{ formAuth.password.label }} {{ formAuth.password() }} {{
+    formAuth.submit() }}
+</form>
+{% endif %}
+
+
+<script
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"
+></script>
+<script src="{{ url_for('static', filename='scripts/admin.js') }}"></script>
+
+</body>
+</html>

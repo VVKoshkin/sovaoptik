@@ -1,0 +1,43 @@
+.text-info {
+  display: block;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+.slider-pic {
+  display: flex;
+  margin-bottom: 50px;
+  align-items: center;
+}
+
+.slider-pic__img {
+  width: 500px;
+}
+
+.slider-pic__text {
+  display: block;
+  margin-left: 10px;
+}
+
+.slider-pic__btn {
+  margin-left: 10px;
+}
+
+.assortment-elem {
+  display: flex;
+  flex-direction: column;
+}
+
+.assortment-elem__head {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.assortment-elem__descr {
+  border: 1px solid black;
+  margin-bottom: 10px;
+}
+
+.assortment-elem__btn {
+  margin-bottom: 50px;
+}

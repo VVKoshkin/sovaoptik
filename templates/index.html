@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Салон семейной оптики "Совушка"</title>
+    <!-- RESET.CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}" />
+    <!-- Roboto Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+        <nav class="header-nav">
+          <p><a class="header-nav__link" href="#top_info">Наши контакты</a></p>
+          <p><a class="header-nav__link" href="#assortment">Наши товары</a></p>
+          <p><a class="header-nav__link" href="#bot_info">Наш врач</a></p>
+        </nav>
+        <div class="mobile-menu" onclick="toogleNav()">
+          <div class="mobile-menu__btn">
+            <hr />
+            <hr />
+            <hr />
+          </div>
+        </div>
+        <p class="header-logo">салон семейной оптики "Совушка"</p>
+      </header>
+      <main class="main mb100">
+        <a name="top_info"></a>
+        <section class="info mb100">
+          <div class="info-worktime">
+            {% for rec in info_top %}
+              <p class="info-worktime__text" {% if rec.is_bold %} style="font-weight: 700" {% endif %}>
+                {% if rec.is_phone %}
+                <a class="tel-link" href="tel:{{ rec.text }}">
+                  {{ rec.text }}
+                </a>
+                {% else %}
+                    {{ rec.text }}
+                {% endif %}
+            {% endfor %}
+          </div>
+          <img class="info-img" src="/static/img/logo_big.png" alt="логотип" />
+        </section>
+        <section class="slider mb100">
+          <div id="slider" data-pic-id="{{ slider_img.id }}" class="slider-images">
+            <img class="slider-img" src="/static/img/slider/{{ slider_img.ref }}.jpg" alt="" />
+            <p class="slider-text">{{ slider_img.inner_text }}</p>
+            <input
+              class="slider-btn btn-left abs_l0"
+              type="button"
+              onclick="sliderPicChange(-1)"
+              value="&lt;"
+            />
+            <input
+              class="slider-btn btn-right abs_r0"
+              type="button"
+              onclick="sliderPicChange(1)"
+              value="&gt;"
+            />
+          </div>
+        </section>
+        <section class="dampers mb100">
+          <p class="dampers-discount red">
+            Дарим скидку 500 рублей при предоставлении рецепта от платного
+            офтальмолога*
+          </p>
+          <p class="dampers-discount cadetblue">
+            Постоянным покупателям скидка 10% на изготовление очков. <br />При
+            одновременном заказе 2х очков скидка на вторую оправу 40%
+          </p>
+          <p class="dampers-discount">Реально невысокие цены на очки:</p>
+          <ul class="dampers-list">
+            {% for rec in damp_list %}
+              <li>{{ rec.text }}</li>
+            {% endfor %}
+          </ul>
+          <p class="dampers-coupon">
+            Купон на скидку при заказе первых очков
+          </p>
+          <p class="dampers-discount small-text">
+            Скидки не суммируются, применяется большая по сумме скидка
+          </p>
+        </section>
+
+        <a name="assortment"></a>
+        <section class="assortment-list mb100">
+          {% for rec in assortment %}
+          <div class="assortment-element">
+            <h3 class="assortment-element__head">{{ rec.header_text }}</h3>
+            <p class="assortment-element__descr">{{ rec.description_text }}</p>
+          </div>
+          {% endfor %}
+          <p class="production-time">
+            Срок изготовления очков от 1 до 7 дней. Изготовление очков с
+            рецептурными линзами от 14 дней
+          </p>
+        </section>
+        <section class="suppliers mb100">
+          <table class="suppliers-table">
+            <tr>
+              <th colspan="2">Наши поставщики линз</th>
+            </tr>
+            <tr>
+              <td class="suppliers-table__coldesc">Страна</td>
+              <td class="suppliers-table__coldesc">Бренд</td>
+            </tr>
+            <tr class="suppliers-table__row">
+              <td>Китай</td>
+              <td>CONCORD ,LEORA</td>
+            </tr>
+            <tr class="suppliers-table__row">
+              <td>Корея</td>
+              <td>CRYOL</td>
+            </tr>
+            <tr class="suppliers-table__row">
+              <td>Израиль</td>
+              <td>SHAMIR</td>
+            </tr>
+            <tr class="suppliers-table__row">
+              <td>Франция</td>
+              <td>BBRG</td>
+            </tr>
+            <tr class="suppliers-table__row">
+              <td>Германия</td>
+              <td>RODENSTOCK</td>
+            </tr>
+            <tr class="suppliers-table__row">
+              <td>США</td>
+              <td>YONGER OPTICS</td>
+            </tr>
+          </table>
+        </section>
+        <a name="bot_info"></a>
+        <section class="info">
+          <p class="info-text">
+            Один из врачей, сотрудничающий с нами -
+            <b>Шпак Лариса Аркадьевна</b>, дипломированный специалист,
+            врач-офтальмолог с 30-ти летним стажем работы в офтальмологии и
+            оптометрии. <br />Специализируется на проблемах деткой
+            офтальмологии, осуществляет подбор контактных линз и очков для
+            коррекции зрения, осуществляет аппаратное лечение, коррекцию зрения.
+            Медицинская лицензия <b>ЛО-50-01-01 1249 от 10.09.2019г</b>.
+            <br />Принимает по адресу: Балашиха, ул.Калинина, д.1, оф. 3.7.
+            График работы: понедельник-пятница с 11:00 до 17:00 по
+            предварительной записи. <br />Записаться можно по телефону
+            <a class="tel-link" href="tel:+79253000861">+7(925)3000 861</a>
+          </p>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer-text">Lorem, ipsum.</p>
+        <p class="footer-text">Voluptate, quibusdam!</p>
+        <p class="footer-text">Aut, provident.</p>
+      </footer>
+    </div>
+
+    <!-- стрелочка вверх -->
+    <div>
+      <a href="#" class="up" rel="nofollow"
+        ><img src="/static/img/arrow_up.png" alt="Вверх"
+      /></a>
+    </div>
+    <!-- купон на скидку -->
+    <div class="coupone">
+      <img class="coupone-img" src="/static/img/coupone.jpg" alt="" />
+      <p class="coupone-close">X</p>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+    <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+  </body>
+</html>
