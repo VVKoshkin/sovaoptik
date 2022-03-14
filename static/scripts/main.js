@@ -25,7 +25,7 @@ const sliderPicChange = (direction) => {
                 sliderImg = new SliderImage(response['id'], response['ref'], response['inner_text']);
                 // changing DOMs
                 sliderDOMElem.dataset.picId = sliderImg.ID;
-                sliderDOMImgElem.src = `/static/img/slider/${sliderImg.imgSrc}.jpg`;
+                sliderDOMImgElem.src = `/static/img/slider/${sliderImg.imgSrc}`;
                 sliderDOMTextElem.innerText = sliderImg.subText;
             },
             error => {
