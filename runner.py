@@ -5,7 +5,7 @@ from flask_script import Manager, Shell
 
 manager = Manager(app)
 
-# эти переменные доступны внутри оболочки без явного импорта
+# СЌС‚Рё РїРµСЂРµРјРµРЅРЅС‹Рµ РґРѕСЃС‚СѓРїРЅС‹ РІРЅСѓС‚СЂРё РѕР±РѕР»РѕС‡РєРё Р±РµР· СЏРІРЅРѕРіРѕ РёРјРїРѕСЂС‚Р°
 def make_shell_context():
     return dict(app=app, db=db, User=User, Post=Post, Tag=Tag,  Category=Category, Employee=Employee, Feedback=Feedback)
 

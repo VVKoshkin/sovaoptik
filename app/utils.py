@@ -1,8 +1,8 @@
-# проверка корректности расширения файла
+# РїСЂРѕРІРµСЂРєР° РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё СЂР°СЃС€РёСЂРµРЅРёСЏ С„Р°Р№Р»Р°
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in config.ALLOWED_EXTENSIONS
 
-# закачка в постоянное хранилище с папки new
+# Р·Р°РєР°С‡РєР° РІ РїРѕСЃС‚РѕСЏРЅРЅРѕРµ С…СЂР°РЅРёР»РёС‰Рµ СЃ РїР°РїРєРё new
 def copy_from_new(tempRef):
     oldRef = app.root_path + tempRef
     file_name = ntpath.basename(oldRef)

@@ -18,7 +18,7 @@ def admin():
     sliderInfo = None
     lowPrice = None
     assortment = None
-    if session.get('authorized') is None or not session.get('authorized'):  # если нет инфы об авторизации - вывод формы
+    if session.get('authorized') is None or not session.get('authorized'):  # РµСЃР»Рё РЅРµС‚ РёРЅС„С‹ РѕР± Р°РІС‚РѕСЂРёР·Р°С†РёРё - РІС‹РІРѕРґ С„РѕСЂРјС‹
         formAuth = AdminForm(request.form)
         if formAuth.validate():
             login = formAuth.login.data
@@ -27,10 +27,10 @@ def admin():
                 session['authorized'] = True
             else:
                 session['authorized'] = False
-                flash('Неверный логин или пароль')
+                flash('РќРµРІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ')
 
             return redirect(url_for('admin'))
-    else:  # если авторизован - заполнение из БД всей нужной инфой
+    else:  # РµСЃР»Рё Р°РІС‚РѕСЂРёР·РѕРІР°РЅ - Р·Р°РїРѕР»РЅРµРЅРёРµ РёР· Р‘Р” РІСЃРµР№ РЅСѓР¶РЅРѕР№ РёРЅС„РѕР№
         if request.method == 'GET':
             topInfo = get_top_info()
             sliderInfo = get_slider_list()
@@ -48,14 +48,14 @@ def slider_controller():
         id = request.args.get('id')
         direction = request.args.get('direction')
         if request.args.__len__() == 0:
-            if request.method == 'GET':  # просто посмотреть весь слайдер
+            if request.method == 'GET':  # РїСЂРѕСЃС‚Рѕ РїРѕСЃРјРѕС‚СЂРµС‚СЊ РІРµСЃСЊ СЃР»Р°Р№РґРµСЂ
                 res = get_slider_list()
                 return sliderImg_list_to_json(res)
         elif request.args.__len__() == 1 and id is not None:
-            if request.method == 'GET':  # посмотреть по ID картинку
+            if request.method == 'GET':  # РїРѕСЃРјРѕС‚СЂРµС‚СЊ РїРѕ ID РєР°СЂС‚РёРЅРєСѓ
                 res = get_slider_current(id)
                 return sliderImg_to_json(res)
-        elif request.args.__len__() == 2 and id is not None and direction is not None:  # посмотреть картинку, следующую за ID в направлении direction
+        elif request.args.__len__() == 2 and id is not None and direction is not None:  # РїРѕСЃРјРѕС‚СЂРµС‚СЊ РєР°СЂС‚РёРЅРєСѓ, СЃР»РµРґСѓСЋС‰СѓСЋ Р·Р° ID РІ РЅР°РїСЂР°РІР»РµРЅРёРё direction
             res = []
             if direction == 'forward':
                 res = get_slider_next(id)
@@ -72,7 +72,7 @@ def slider_controller():
             new_records = 0
             updated_records = 0
             deleted_records = 0
-            # insert/update + счетчики их
+            # insert/update + СЃС‡РµС‚С‡РёРєРё РёС…
             for elem in request_json:
                 result_by_elem = store_slider_card(elem)
                 id = result_by_elem.get('id')
@@ -82,12 +82,12 @@ def slider_controller():
                 else:
                     updated_records += 1
                 result.get('elements').append(result_by_elem)
-            #  удаление из БД и хранилища удалённых с фронта файлов
-            # удаление элементов, id которых не пришли с формы
+            #  СѓРґР°Р»РµРЅРёРµ РёР· Р‘Р” Рё С…СЂР°РЅРёР»РёС‰Р° СѓРґР°Р»С‘РЅРЅС‹С… СЃ С„СЂРѕРЅС‚Р° С„Р°Р№Р»РѕРІ
+            # СѓРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚РѕРІ, id РєРѕС‚РѕСЂС‹С… РЅРµ РїСЂРёС€Р»Рё СЃ С„РѕСЂРјС‹
             elems_2_delete = None
             if ids.__len__() > 0:
                 elems_2_delete = SliderImg.query.filter(SliderImg.id.not_in(ids)).all()
-            else:  # на случай если пользователь удалил вообще все элементы и надо вычищать БД полностью
+            else:  # РЅР° СЃР»СѓС‡Р°Р№ РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ СѓРґР°Р»РёР» РІРѕРѕР±С‰Рµ РІСЃРµ СЌР»РµРјРµРЅС‚С‹ Рё РЅР°РґРѕ РІС‹С‡РёС‰Р°С‚СЊ Р‘Р” РїРѕР»РЅРѕСЃС‚СЊСЋ
                 elems_2_delete = SliderImg.query.all()
             for elem in elems_2_delete:
                 path_2_delete = app.root_path + config.SLIDER_PATH + elem.ref
@@ -113,14 +113,14 @@ def slider_store_new():
         filename = secure_filename(file.filename)
         url_new = config.UPLOAD_FOLDER + filename
         path_new = app.root_path + url_new
-        file.save(path_new)  # сохраняется в папку new
+        file.save(path_new)  # СЃРѕС…СЂР°РЅСЏРµС‚СЃСЏ РІ РїР°РїРєСѓ new
         return {"result": "ok", "url_new": url_new, "filename": filename}
 
 
 # REST for top-info (only POST, for admin panel)
 @app.route('/api/0.1/topInfo', methods=['POST'])
 def top_info_controller():
-    # TODO if session.get('authorized') итд
+    # TODO if session.get('authorized') РёС‚Рґ
     request_json = request.get_json()
     result = None
     if type(request_json) is list:
@@ -129,7 +129,7 @@ def top_info_controller():
         new_records = 0
         updated_records = 0
         deleted_records = 0
-        # insert/update + счетчики их
+        # insert/update + СЃС‡РµС‚С‡РёРєРё РёС…
         for elem in request_json:
             result_by_elem = store_top_info(elem)
             id = result_by_elem.get('id')
@@ -139,11 +139,11 @@ def top_info_controller():
             else:
                 updated_records += 1
             result.get('elements').append(result_by_elem)
-        # удаление элементов, id которых не пришли с формы
+        # СѓРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚РѕРІ, id РєРѕС‚РѕСЂС‹С… РЅРµ РїСЂРёС€Р»Рё СЃ С„РѕСЂРјС‹
         elems_2_delete = None
         if ids.__len__() > 0:
             elems_2_delete = TopInfo.query.filter(TopInfo.id.not_in(ids)).all()
-        else:  # на случай если пользователь удалил вообще все элементы и надо вычищать БД полностью
+        else:  # РЅР° СЃР»СѓС‡Р°Р№ РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ СѓРґР°Р»РёР» РІРѕРѕР±С‰Рµ РІСЃРµ СЌР»РµРјРµРЅС‚С‹ Рё РЅР°РґРѕ РІС‹С‡РёС‰Р°С‚СЊ Р‘Р” РїРѕР»РЅРѕСЃС‚СЊСЋ
             elems_2_delete = TopInfo.query.all()
         for elem in elems_2_delete:
             db.session.delete(elem)
@@ -153,7 +153,7 @@ def top_info_controller():
         result['updated_records'] = updated_records
         result['deleted_records'] = deleted_records
         return result
-    elif type(request_json) is dict:  # одиночное сохранение
+    elif type(request_json) is dict:  # РѕРґРёРЅРѕС‡РЅРѕРµ СЃРѕС…СЂР°РЅРµРЅРёРµ
         result = store_top_info(request_json)
         db.session.commit()
         return result
@@ -181,11 +181,11 @@ def low_price_controller():
             else:
                 updated_records += 1
             result.get('elements').append(result_by_elem)
-        # удаление элементов, id которых не пришли с формы
+        # СѓРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚РѕРІ, id РєРѕС‚РѕСЂС‹С… РЅРµ РїСЂРёС€Р»Рё СЃ С„РѕСЂРјС‹
         elems_2_delete = None
         if ids.__len__() > 0:
             elems_2_delete = DampersList.query.filter(DampersList.id.not_in(ids)).all()
-        else:  # на случай если пользователь удалил вообще все элементы и надо вычищать БД полностью
+        else:  # РЅР° СЃР»СѓС‡Р°Р№ РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ СѓРґР°Р»РёР» РІРѕРѕР±С‰Рµ РІСЃРµ СЌР»РµРјРµРЅС‚С‹ Рё РЅР°РґРѕ РІС‹С‡РёС‰Р°С‚СЊ Р‘Р” РїРѕР»РЅРѕСЃС‚СЊСЋ
             elems_2_delete = DampersList.query.all()
         for elem in elems_2_delete:
             db.session.delete(elem)
@@ -217,11 +217,11 @@ def assortment_controller():
             else:
                 updated_records += 1
             result.get('elements').append(result_by_elem)
-        # удаление элементов, id которых не пришли с формы
+        # СѓРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚РѕРІ, id РєРѕС‚РѕСЂС‹С… РЅРµ РїСЂРёС€Р»Рё СЃ С„РѕСЂРјС‹
         elems_2_delete = None
         if ids.__len__() > 0:
             elems_2_delete = Assortment.query.filter(Assortment.id.not_in(ids)).all()
-        else:  # на случай если пользователь удалил вообще все элементы и надо вычищать БД полностью
+        else:  # РЅР° СЃР»СѓС‡Р°Р№ РµСЃР»Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ СѓРґР°Р»РёР» РІРѕРѕР±С‰Рµ РІСЃРµ СЌР»РµРјРµРЅС‚С‹ Рё РЅР°РґРѕ РІС‹С‡РёС‰Р°С‚СЊ Р‘Р” РїРѕР»РЅРѕСЃС‚СЊСЋ
             elems_2_delete = Assortment.query.all()
         for elem in elems_2_delete:
             db.session.delete(elem)

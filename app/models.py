@@ -3,7 +3,7 @@ from app import db
 # DB Models
 class TopInfo(db.Model):
     __tablename__ = 'TOP_INFO'
-    # TODO по хорошему тут нужна инкапсуляция + геттеры и сеттеры
+    # TODO РїРѕ С…РѕСЂРѕС€РµРјСѓ С‚СѓС‚ РЅСѓР¶РЅР° РёРЅРєР°РїСЃСѓР»СЏС†РёСЏ + РіРµС‚С‚РµСЂС‹ Рё СЃРµС‚С‚РµСЂС‹
     id = db.Column('id', db.Integer, primary_key=True)
     order = db.Column('rec_order', db.Integer, nullable=False)
     text = db.Column('rec_text', db.Text)
@@ -43,7 +43,7 @@ class SliderImg(db.Model):
     ref = db.Column('ref', db.String, nullable=False)
     inner_text = db.Column('inner_text', db.String, nullable=True)
 
-    # TODO по хорошему тут нужна инкапсуляция + геттеры и сеттеры
+    # TODO РїРѕ С…РѕСЂРѕС€РµРјСѓ С‚СѓС‚ РЅСѓР¶РЅР° РёРЅРєР°РїСЃСѓР»СЏС†РёСЏ + РіРµС‚С‚РµСЂС‹ Рё СЃРµС‚С‚РµСЂС‹
     def __init__(self, ref, inner_text):
         self.ref = ref
         self.inner_text = inner_text

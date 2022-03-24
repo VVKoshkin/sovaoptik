@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import os, config
 
-# создание экземпляра приложения
+# СЃРѕР·РґР°РЅРёРµ СЌРєР·РµРјРїР»СЏСЂР° РїСЂРёР»РѕР¶РµРЅРёСЏ
 app = Flask(__name__)
 app.config.from_object(os.environ.get('FLASK_ENV') or 'config.DevelopementConfig')
 
