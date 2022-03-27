@@ -1,5 +1,4 @@
-# Routing
-from flask import render_template, session, request, flash, url_for, redirect
+from flask import render_template, session, request, flash, url_for, redirect, abort
 from werkzeug.utils import secure_filename
 
 from .DAO import *
@@ -7,6 +6,7 @@ from .forms import AdminForm
 from .utils import *
 
 
+# Routing
 @app.route('/')
 def index():
     info_top = get_top_info()
@@ -34,7 +34,6 @@ def admin():
             else:
                 session['authorized'] = False
                 flash('Неверный логин или пароль')
-
             return redirect(url_for('admin'))
     else:  # если авторизован - заполнение из БД всей нужной инфой
         if request.method == 'GET':
@@ -42,7 +41,6 @@ def admin():
             sliderInfo = get_slider_list()
             lowPrice = get_damp_list()
             assortment = get_assortment()
-
     return render_template('admin.html', formAuth=formAuth, authorized=session.get('authorized'), topInfo=topInfo,
                            sliderInfo=sliderInfo, lowPrice=lowPrice, assortment=assortment)
 
@@ -69,7 +67,8 @@ def slider_controller():
                 res = get_slider_prev(id)
             return sliderImg_to_json(res)
     elif request.method == 'POST':
-        # TODO if not authorized then 403 Forbidden
+        if session.get('authorized') is None or not session.get('authorized'):
+            abort(403, 'Access Restricted, go to hell!')
         request_json = request.get_json()
         result = None
         if type(request_json) is list:
@@ -110,23 +109,31 @@ def slider_controller():
 # SLIDER - store new pic in temp folder
 @app.route('/api/0.1/slider/new', methods=['POST'])
 def slider_store_new():
+    if session.get('authorized') is None or not session.get('authorized'):
+        abort(403, 'Access Restricted, go to hell!')
     if 'fileObject' not in request.files:
-        return None  # TODO
+        return {
+            "error": True,
+            "errorType": "NoFileFound"
+        }
     file = request.files['fileObject']
     if file.filename == '':
-        return None  # TODO
+        return {
+            "error": True,
+            "errorType": "EmptyFileName"
+        }
     if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        url_new = config.UPLOAD_FOLDER + filename
-        path_new = app.root_path + url_new
-        file.save(path_new)  # сохраняется в папку new
+        res = store_img_new(file)
+        url_new = res.get('url_new')
+        filename = res.get('filename')
         return {"result": "ok", "url_new": url_new, "filename": filename}
 
 
 # REST for top-info (only POST, for admin panel)
 @app.route('/api/0.1/topInfo', methods=['POST'])
 def top_info_controller():
-    # TODO if session.get('authorized') итд
+    if session.get('authorized') is None or not session.get('authorized'):
+        abort(403, 'Access Restricted, go to hell!')
     request_json = request.get_json()
     result = None
     if type(request_json) is list:
@@ -163,14 +170,15 @@ def top_info_controller():
         result = store_top_info(request_json)
         db.session.commit()
         return result
-
-    # TODO catch 400 Bad Request
+    else:
+        abort(400, 'Bad request')
 
 
 # REST for low-price (only POST, for admin panel)
 @app.route('/api/0.1/lowPrice', methods=['POST'])
 def low_price_controller():
-    # TODO if not authorized then 403 Forbidden
+    if session.get('authorized') is None or not session.get('authorized'):
+        abort(403, 'Access Restricted, go to hell!')
     requestJSON = request.get_json()
     if type(requestJSON) is list:
         result = {'elements': []}
@@ -206,7 +214,8 @@ def low_price_controller():
 # REST for assortment (only POST, for admin panel)
 @app.route('/api/0.1/assortment', methods=['POST'])
 def assortment_controller():
-    # TODO if not authorized then 403 Forbidden
+    if session.get('authorized') is None or not session.get('authorized'):
+        abort(403, 'Access Restricted, go to hell!')
     requestJSON = request.get_json()
     if type(requestJSON) is list:
         result = {'elements': []}

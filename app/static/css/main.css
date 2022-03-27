@@ -57,7 +57,7 @@ body {
 
 .up {
   position: fixed; /* фиксированное положение */
-  bottom: 50px; /* отступ от нижней части экрана */
+  bottom: 150px; /* отступ от нижней части экрана */
   right: 50px; /* отступ справа */
   cursor: pointer; /* вид курсора при наведении */
   background-color: #fff;
@@ -362,15 +362,19 @@ td {
 
 .footer {
   background-color: gray;
-  height: 50px;
   display: flex;
   justify-content: space-around;
   flex-shrink: 0;
 }
-
 .footer-text {
   line-height: 50px;
 }
+
+.footer-block{
+  padding: 15px 0;
+}
+
+
 
 /* замена пунктов в хедере на выпадающий список при слишком маленьком разрешении */
 @media only screen and (max-device-width: 1300px) {
@@ -414,5 +418,9 @@ td {
   .production-time {
     text-align: center;
     margin-left: 0;
+  }
+
+  .footer-text {
+    font-size: 18px;
   }
 }

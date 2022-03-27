@@ -95,7 +95,7 @@ const addSliderListeners =() =>{
                     addDelButtonListener(newImg, slider);
                     },
                     error => {
-                        console.log(error) // TODO
+                        alert("Не удалось сохранить файл: "+error.text)
                     }
                 );
             })
@@ -247,7 +247,7 @@ const storeTopInfo = () => {
     const promise = TopTableElement.bulkPost(bulkElems);
     promise.then(
         result => {
-            console.log(result); // TODO рисовать галочку и плюсик и обновлять в соответствии с БД
+            document.location.reload();
         },
         error => {
             alert(error.text);
@@ -267,7 +267,7 @@ const storeSlider = () => {
     const promise = SliderElement.bulkPost(bulkElems);
     promise.then(
         result => {
-            console.log(result); // TODO рисовать галочку и плюсик и обновлять в соответствии с БД
+            document.location.reload();
         },
         error => {
             alert(error.text);
@@ -288,7 +288,7 @@ const storeLowPrices = () => {
     const promise = LowPriceElem.bulkPost(bulkElems);
     promise.then(
         result => {
-            console.log(result); // TODO рисовать галочку и плюсик и обновлять в соответствии с БД
+            document.location.reload();
         },
         error => {
             alert(error.text);
@@ -309,7 +309,7 @@ const storeAssortment = () => {
     const promise = AssortmentElem.bulkPost(bulkElems);
     promise.then(
         result => {
-            console.log(result); // TODO рисовать галочку и плюсик и обновлять в соответствии с БД
+            document.location.reload();
         },
         error => {
             alert(error.text);

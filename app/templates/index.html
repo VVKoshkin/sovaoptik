@@ -45,6 +45,7 @@
                 {% else %}
                     {{ rec.text }}
                 {% endif %}
+              </p>
             {% endfor %}
           </div>
           <img class="info-img" src="/static/img/logo_big.png" alt="логотип" />
@@ -156,9 +157,25 @@
         </section>
       </main>
       <footer class="footer">
-        <p class="footer-text">Lorem, ipsum.</p>
-        <p class="footer-text">Voluptate, quibusdam!</p>
-        <p class="footer-text">Aut, provident.</p>
+        <div class="footer-block">
+          <p class="footer-text">г.Балашиха ул. Калинина, д.1, 1 этаж, каб.1.6</p>
+          <p class="footer-text">Пн.-пт. 11:00-19:00</p>
+          <p class="footer-text">Сб. 11:00-18:00</p>
+        </div>
+        <div class="footer-block">
+          {% for rec in info_top %}
+          <!-- только телефоны -->
+            {% if rec.is_phone %}
+            <p class="footer-text"><a class="tel-link" href="tel:{{ rec.text }}">
+              {{ rec.text }}
+            </a>
+          </p>
+            {% endif %}
+        {% endfor %}
+        </div>
+        <div class="footer-block">
+          <a href="https://vk.com/id504427139" class="footer-socnet" target="_blank"><img src="{{ url_for('static', filename='img/VK-ICO.png') }}" alt=""></a>
+        </div>
       </footer>
     </div>
 
