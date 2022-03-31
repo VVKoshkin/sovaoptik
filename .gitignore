@@ -1,4 +1,7 @@
 .vscode/settings.json
-.idea
-.jpg
-.png
+*.idea
+app/static/img/slider/*
+*.png
+*.pyc
+venv
+*.log
