@@ -63,13 +63,19 @@ const addSliderListeners =() =>{
     const sliderCards = $('#slider_cards');
     sliderCards.each((index, row) => {
         addDelButtonListener(row, slider);
-    });    
+    });
     // функционал кнопки добавления
     const addButton = $('.slider').find('input[name="addButton"]');
     addButton.click((e) => {
         // отображение кнопки загрузки файла
-        const uploader = $(e.target).siblings('div[name="file-uploader"]');
-        $(uploader).removeClass('d-none');
+        // поскольку по политике безопасности невозможно никак изменить файл загрузчика
+        // то загрузчик будет рендериться новый каждый раз
+        // а старый уничтожаться
+	const uploaderMarkup = `<div class="custom-file" name="file-uploader">
+        <input type="file" multiple="" accept="image/jpeg" name="file-uploader" class="custom-file-input">
+	</div>`;
+        const uploader = $.parseHTML(uploaderMarkup);
+	$(uploader).insertAfter($(e.target));
         $(uploader).find('input[type="file"]').on('change', (e) => {
             Array.from(e.target.files).forEach((file) => {
                 const fileName = file.name;
@@ -99,7 +105,7 @@ const addSliderListeners =() =>{
                     }
                 );
             })
-            uploader.addClass('d-none');
+            $(uploader).remove();
         });
     });
     // функционал кнопки сохранения
