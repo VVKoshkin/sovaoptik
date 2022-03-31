@@ -71,42 +71,42 @@ const addSliderListeners =() =>{
         // поскольку по политике безопасности невозможно никак изменить файл загрузчика
         // то загрузчик будет рендериться новый каждый раз
         // а старый уничтожаться
-	const uploaderMarkup = `<div class="custom-file" name="file-uploader">
-        <input type="file" multiple="" accept="image/jpeg" name="file-uploader" class="custom-file-input">
-	</div>`;
-        const uploader = $.parseHTML(uploaderMarkup);
-	$(uploader).insertAfter($(e.target));
-        $(uploader).find('input[type="file"]').on('change', (e) => {
-            Array.from(e.target.files).forEach((file) => {
-                const fileName = file.name;
-                const promise = SliderElement.storeNew(file);
-                promise.then(
-                    result => {
-                        const resultJSON = JSON.parse(result);
-                        const newImgHTML = `<div class="slider-pic" data-id="-1" data-filename = ${resultJSON['filename']}>
-                        <img
-                                class="slider-pic__img mb-2"
-                                src="${resultJSON['url_new']}"
-                                alt="Ошибка при открытии файла"
-                        />
-                        <input
-                                class="slider-pic__text mb-2"
-                                type="text"
-                                placeholder="Введите описание под картинку"
-                        />
-                        <input class="btn btn-danger" type="button" value="Удалить" name="delButton"/>
-                    </div>`
-                    const newImg = $.parseHTML(newImgHTML);
-                    $(sliderCards).append(newImg);
-                    addDelButtonListener(newImg, slider);
-                    },
-                    error => {
-                        alert("Не удалось сохранить файл: "+error.text)
-                    }
-                );
-            })
-            $(uploader).remove();
-        });
+        const uploaderMarkup = `<div class="custom-file" name="file-uploader">
+            <input type="file" multiple accept="image/jpeg" name="file-uploader" class="custom-file-input">
+        </div>`;
+            const uploader = $.parseHTML(uploaderMarkup);
+        $(uploader).insertAfter($(e.target).next('input[name="saveButton"]'));
+            $(uploader).find('input[type="file"]').on('change', (e) => {
+                Array.from(e.target.files).forEach((file) => {
+                    const fileName = file.name;
+                    const promise = SliderElement.storeNew(file);
+                    promise.then(
+                        result => {
+                            const resultJSON = JSON.parse(result);
+                            const newImgHTML = `<div class="slider-pic" data-id="-1" data-filename = ${resultJSON['filename']}>
+                            <img
+                                    class="slider-pic__img mb-2"
+                                    src="${resultJSON['url_new']}"
+                                    alt="Ошибка при открытии файла"
+                            />
+                            <input
+                                    class="slider-pic__text mb-2"
+                                    type="text"
+                                    placeholder="Введите описание под картинку"
+                            />
+                            <input class="btn btn-danger" type="button" value="Удалить" name="delButton"/>
+                        </div>`
+                        const newImg = $.parseHTML(newImgHTML);
+                        $(sliderCards).append(newImg);
+                        addDelButtonListener(newImg, slider);
+                        },
+                        error => {
+                            alert("Не удалось сохранить файл: "+error.text)
+                        }
+                    );
+                })
+                $(uploader).remove();
+            });
     });
     // функционал кнопки сохранения
     const saveButton = $('.slider').find('input[name="saveButton"]');
