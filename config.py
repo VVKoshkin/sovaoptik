@@ -22,6 +22,6 @@ SQLALCHEMY_DATABASE_URI = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_P
 secret_key = os.environ.get('WTF_KEY')
 
 # Slider "filestorage"
-UPLOAD_FOLDER = '\\static\\img\\slider\\new\\'
-SLIDER_PATH = '\\static\\img\\slider\\'
+UPLOAD_FOLDER = '/static/img/slider/new/'
+SLIDER_PATH = '/static/img/slider/'
 ALLOWED_EXTENSIONS = {'jpg', 'jpeg'}
