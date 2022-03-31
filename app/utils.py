@@ -34,14 +34,14 @@ def sliderImg_to_json(slider_img):
 def store_img_new(file):
     res = {}
     MAX_WIDTH = 1200
-    filename = f'{datetime.now().strftime("%Y-%m-%d %H-%M-%S")}'
     i = 1
     while True:
-        url_new = f'{config.UPLOAD_FOLDER}{filename}-{i}.jpg'
+        filename = f'{datetime.now().strftime("%Y-%m-%d %H-%M-%S")}-{i}.jpg'
+        url_new = f'{config.UPLOAD_FOLDER}{filename}'
         path_new = app.root_path + url_new
         if not os.path.isfile(path_new):
             break
-        i+=1
+        i += 1
     with Image.open(file) as orig_image:
         orig_width = orig_image.width
         if orig_width > MAX_WIDTH:
