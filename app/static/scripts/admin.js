@@ -78,11 +78,12 @@ const addSliderListeners =() =>{
         $(uploader).insertAfter($(e.target).next('input[name="saveButton"]'));
             $(uploader).find('input[type="file"]').on('change', (e) => {
                 Array.from(e.target.files).forEach((file) => {
-                    const fileName = file.name;
+                    // const fileName = file.name;
                     const promise = SliderElement.storeNew(file);
                     promise.then(
                         result => {
                             const resultJSON = JSON.parse(result);
+                            console.log(resultJSON);
                             const newImgHTML = `<div class="slider-pic" data-id="-1" data-filename = ${resultJSON['filename']}>
                             <img
                                     class="slider-pic__img mb-2"
@@ -104,7 +105,7 @@ const addSliderListeners =() =>{
                             alert("Не удалось сохранить файл: "+error.text)
                         }
                     );
-                })
+                });
                 $(uploader).remove();
             });
     });

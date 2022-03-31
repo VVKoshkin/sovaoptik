@@ -35,14 +35,18 @@ def store_img_new(file):
     res = {}
     MAX_WIDTH = 1200
     i = 1
-    filename = f'{datetime.now().strftime("%Y-%m-%d %H-%M-%S")}-{i}.jpg'
-    url_new = f'{config.UPLOAD_FOLDER}{filename}'
-    path_new = app.root_path + url_new
+    filename = None
+    url_new = None
+    path_new = None
     while True:
-        filename = f'{datetime.now().strftime("%Y-%m-%d %H-%M-%S")}-{i}.jpg'
+        print(file.filename)
+        print(i)
+        filename = f'{datetime.now().strftime("%Y-%m-%d-%H-%M-%S")}-{i}.jpg'
+        print("file=" + filename)
         url_new = f'{config.UPLOAD_FOLDER}{filename}'
         path_new = app.root_path + url_new
         if not os.path.isfile(path_new):
+            print('Gotcha!')
             break
         i += 1
     with Image.open(file) as orig_image:
