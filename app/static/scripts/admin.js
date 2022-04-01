@@ -3,6 +3,16 @@ const slider = 'slider';
 const lowPrice = 'lowPrice';
 const assortment = 'assortment'
 
+
+const sleep = (milliseconds) => {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+
+
 // при загрузке страницы полностью
 $(() => {
     addTopInfoListeners();
@@ -78,7 +88,7 @@ const addSliderListeners =() =>{
         $(uploader).insertAfter($(e.target).next('input[name="saveButton"]'));
             $(uploader).find('input[type="file"]').on('change', (e) => {
                 Array.from(e.target.files).forEach((file) => {
-                    // const fileName = file.name;
+		    sleep(10);
                     const promise = SliderElement.storeNew(file);
                     promise.then(
                         result => {
@@ -441,6 +451,19 @@ class SliderElement {
         });
     }
 
+    static getFileName() {
+        const date = new Date();
+        const year = date.getFullYear();
+        const month = date.getMonth() < 10 ? `0${date.getMonth()}` : date.getMonth();
+	const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+	const hour = date.getHours < 10 ? `0${date.getHours()}` : date.getHours();
+	const minutes = date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes();
+	const seconds = date.getSeconds() < 10 ? `0${date.getSeconds()}` : date.getSeconds();
+	const ms = date.getMilliseconds();
+	const result = `${year}-${month}-${day}-${hour}-${minutes}-${seconds}-${ms}.jpg`;
+	console.log(result);
+	return result;
+    }
     static storeNew(file) {
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
@@ -448,8 +471,7 @@ class SliderElement {
             // файлы кладутся в объект запроса
             let formData = new FormData();
             formData.append('fileObject', file);
-            // formData.append('fileObject', 'nofile');
-            formData.append("test", true);
+            formData.append('fileName', SliderElement.getFileName());
             xhr.addEventListener('readystatechange', () => {
                 if (xhr.readyState !== 4) return;
 

@@ -117,13 +117,14 @@ def slider_store_new():
             "errorType": "NoFileFound"
         }
     file = request.files['fileObject']
-    if file.filename == '':
+    filename = request.form.get('fileName');
+    if filename == '' or filename is None:
         return {
             "error": True,
             "errorType": "EmptyFileName"
         }
     if file and allowed_file(file.filename):
-        res = store_img_new(file)
+        res = store_img_new(file, filename)
         url_new = res.get('url_new')
         filename = res.get('filename')
         return {"result": "ok", "url_new": url_new, "filename": filename}

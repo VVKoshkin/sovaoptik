@@ -31,24 +31,11 @@ def sliderImg_to_json(slider_img):
 
 
 # закачка в папку new
-def store_img_new(file):
+def store_img_new(file, filename):
     res = {}
     MAX_WIDTH = 1200
-    i = 1
-    filename = None
-    url_new = None
-    path_new = None
-    while True:
-        print(file.filename)
-        print(i)
-        filename = f'{datetime.now().strftime("%Y-%m-%d-%H-%M-%S")}-{i}.jpg'
-        print("file=" + filename)
-        url_new = f'{config.UPLOAD_FOLDER}{filename}'
-        path_new = app.root_path + url_new
-        if not os.path.isfile(path_new):
-            print('Gotcha!')
-            break
-        i += 1
+    url_new = f'{config.UPLOAD_FOLDER}{filename}'
+    path_new = app.root_path + url_new
     with Image.open(file) as orig_image:
         orig_width = orig_image.width
         if orig_width > MAX_WIDTH:
